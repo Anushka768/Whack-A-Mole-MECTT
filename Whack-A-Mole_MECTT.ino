@@ -2,7 +2,7 @@
 // McMaster Engineering Concrete Toboggan Team 
 
 // some knowledgable info
-// pinMode + digitalWrite control electricity, LEDC controls waveforms, and MD_Parola controls devices.
+// pinMode + digitalWrite control electricity, and MD_Parola controls devices.
 // millis() : build-in Arduino Function which stores Number of milliseconds since the board powered on
 #include <MD_Parola.h>
 #include <MD_MAX72xx.h>
@@ -74,22 +74,30 @@ int countdownValue = 3;
 // Button Edge Tracking -------------------------------------------------------
 bool lastResetBtn = HIGH;
 bool lastDiffBtn = HIGH;
-// set up Passive Buzzer --------------------------------------------------------------
 
-const int BUZZER_CH = 0;
+// set up Active Buzzer --------------------------------------------------------------
+void buzzerOn() {
+  digitalWrite(BUZZER_PIN, HIGH);
+}
+
+void buzzerOff() {
+  digitalWrite(BUZZER_PIN, LOW);
+}
 
 void buzzerHappy() {
-  ledcWriteTone(BUZZER_CH, 1200); // Happy sound with 1200 Hz square wave
-  delay(100); // tone keeps playing for the delay time 
-  ledcWriteTone(BUZZER_CH, 1600); 
+  buzzerOn();
   delay(100);
-  ledcWriteTone(BUZZER_CH,0);
+  buzzerOff();
+  delay(60);
+  buzzerOn();
+  delay(120);
+  buzzerOff();
 }
 
 void buzzerSad() {
-  ledcWriteTone(BUZZER_CH, 400);
-  delay(300);
-  ledcWriteTone(BUZZER_CH, 0);
+  buzzerOn();
+  delay(400);
+  buzzerOff();
 }
 
 // Matrix Helper Function --------------------------------------------
@@ -207,7 +215,8 @@ void setup() {
     pinMode(moles[i].buttonPin, INPUT_PULLUP); 
   }
 
-  ledcAttach(BUZZER_PIN, 2000, 8); // 2000 - frequency(Hz), 8 - Resolution(bits),  we use ledc for buzzer as it takes square wave form
+  pinMode(BUZZER_PIN, OUTPUT);
+  digitalWrite(BUZZER_PIN, LOW);
 
   mx.begin(); // for MD_MAX72XX
   matrix.begin(); // makes the display library ready for MD Parola
