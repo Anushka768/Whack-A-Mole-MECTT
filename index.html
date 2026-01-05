@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+        <meta charset = "UTF-8">
+        <title> Whack-a-Emotion Monitor</title>
+
+        <!--Firebase core (allows website to talk to Firebase) -->
+        <script src = "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> 
+
+        <!--Firebase database (allows reading/writing database) -->
+        <script src = "https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+        <link rel = "stylesheet" href = "style.css">
+    </head>
+
+    <body>
+        <h1>Whach-a-Emotion</h1>
+        <div id = "status">Waiting for game...</div>
+        <div id = "score">Score: 0</div>
+        <video id = "gameVideo" width = "320" autoplay muted></video>
+        <script src = "script.js"></script>
+    </body>
+</html>
