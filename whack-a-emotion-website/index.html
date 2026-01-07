@@ -1,34 +1,34 @@
-<!DOCTYPE html>     <!--tell browser it is html file-->
-<html lang = "en">      <!--tell browser languahe used is english-->
+<!DOCTYPE html> <!--tell browser it is html file-->
+<html lang = "en"> <!--tell browser languahe used is english-->
 
-    <head>      <!--info abt the page-->
-        <meta charset = "UTF-8"/>       <!--for correct display of all characters-->
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>         <!--to scale for mobile phones-->
-        <title> Whack-a-Emotion Monitor</title>         <!--text on browser tab-->
-        <link rel = "stylesheet" href = "style.css">        <!--connect css to html-->
+    <head> <!--info abt the page-->
+        <meta charset = "UTF-8"/> <!--for correct display of all characters-->
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/> <!--to scale for mobile phones-->
+        <title> Whack-a-Emotion Monitor</title> <!--text on browser tab-->
+        <link rel = "stylesheet" href = "style.css"> <!--connect css to html-->
     </head>
 
-    <body>      <!--everything user sees-->
+    <body> <!--everything user sees-->
 
         <!--HOME SCREEN-->
-        <div id = "home-screen" class = "screen active">        <!--div: is a box, id="home-screen": unique name for this box, class="screen active": for styling and js logic-->
-        <h1 class = "title">Whach-a-Emotion</h1>        <!--h1 means Big heading, class="title": used by CSS to style -->
-        <p class="subtitle">MECTT Edition</p>       <!--p: is a paragraph-->
+        <div id = "home-screen" class = "screen active"> <!--div: is a box, id="home-screen": unique name for this box, class="screen active": for styling and js logic-->
+        <h1 class = "title">Whach-a-Emotion</h1> <!--h1 means Big heading, class="title": used by CSS to style -->
+        <p class="subtitle">MECTT Edition</p> <!--p: is a paragraph-->
 
-        <button class = "btn" onclick = "goToSetup()">Start Game</button>           <!--button: creates a clickable button, onlik: run a js function when clicked, class: styling-->
+        <button class = "btn" onclick = "goToSetup()">Start Game</button> <!--button: creates a clickable button, onlik: run a js function when clicked, class: styling-->
         <button class = "btn secondary" onclick = "showRules()">Rules</button>
         <button class = "btn secondary" onclick = "showLeaderboard()">Leaderboard</button>
         </div>
 
         <!--RULES SCREEN-->
-        <div id = "rules-screen" class = "screen">          <!--since no active class this screen is hidden initially-->
+        <div id = "rules-screen" class = "screen"> <!--since no active class this screen is hidden initially-->
             <h2>Rules</h2>
             <p>Hit the correct emotions as fast as you can!</p>
             <button class = "btn" onclick = "goHome()">Back</button>
         </div>
 
         <!--LEADERBOARD SCREEN-->
-        <div id = "leaderboard-screen" class = "screen">          <!--since no active class this screen is hidden initially-->
+        <div id = "leaderboard-screen" class = "screen"> <!--since no active class this screen is hidden initially-->
             <h2>Leaderboard</h2>
             <p>Top Players coming soon</p>
             <button class = "btn" onclick = "goHome()">Back</button>

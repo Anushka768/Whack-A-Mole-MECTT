@@ -19,13 +19,32 @@ const db = firebaseConfig.database();
 const statusDiv = document.getElementById("status");
 const scoreDiv = document.getElementById("score");
 
-//Game States
-db.ref("game/state").on("value", snapshot => {
-    const state = snapshot.val();
-    statusDiv.innerText = "State: " + state;
-});
+//hides all screens
+function hideAllScreens() {
+  document.querySelectorAll('.screen') //document: webpage, querySelectorAll : find all elements that match the class selector in brackets
+    .forEach(screen=> {
+      screen.classList.remove('active'); // remove active class from each list
+    });
+}
 
-//Score
-db.ref("game/score").on("value", snapshot => {
-    scoreDiv.innerText = "Score: "+ snapshot.val();
-});
+function goHome(){
+  hideAllScreens();
+  document.getElementById('home-screen') // getElementById finds one element by ID
+    .classList.add('active');
+}
+
+function goToSetup(){
+  alert("Player Setup");
+}
+
+function showRules(){
+  hideAllScreens();
+  document.getElementById('rules-screen')
+    .classList.add('active');
+}
+
+function showLeaderboard() {
+  hideAllScreens();
+  document.getElementById('leaderboard-screen')
+    .classList.add('active');
+}

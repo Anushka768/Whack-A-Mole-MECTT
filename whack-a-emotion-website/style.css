@@ -1,20 +1,75 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #111;
-    color: white;
-}
+*{ /* --(*)means apply to everything on the page */
 
-#status{
-    font-size: 24px;
-    margin: 20px;
-}
+    box-sizing: border-box;
+    font-family: 'Segeo UI', sans-serif;
 
-#score{
-    font-size: 20px;
-}
+    body {
+        margin: 0; /* remove default spacing */
+        height: 100vh; /* full screen height */
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
 
-video{
-    margin-top: 20px;
-    border-radius: 12px;
+        /* center everything */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    /* .screen is a CLASS. Anything with class="screen" gets this styling */
+    .screen{
+        display: none; /* hidden by default */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+   /* .screen.active means: An element that has BOTH classes "screen" AND "active" */
+    .screen.active{
+        display: flex; /* only active screen is visible */
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 0.2em;
+    }
+
+    .subtitle {
+        opacity: 0.8;
+        margin-bottom: 2em;
+    }
+
+    .btn {
+        width: 220px;
+        padding: 14px;
+        margin: 10px;
+
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        background: #ff4b2b;
+        color: white;
+
+        /* smooth animation */
+        transition: transform 0.2s, background 0.2s;
+    }
+
+    /* When mouse is over button */
+    .btn:hover {
+        transform: scale(1.05);
+        background: #ff416c;
+    }
+
+    /* Secondary button style */
+    .btn.secondary {
+        background: transparent;
+        border: 2px solid white;
+    }
+
+    .btn.secondary:hover {
+        background: rgba(255,255,255,0.15);
+    }
 }
