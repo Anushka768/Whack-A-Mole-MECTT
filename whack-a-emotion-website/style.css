@@ -1,14 +1,14 @@
 *{ /* --(*)means apply to everything on the page */
 
     box-sizing: border-box;
-    font-family: 'Segeo UI', sans-serif;
+}
 
     body {
         margin: 0; /* Remove white borders */
         width: 100vw; /* vw = viewport width (screen width) */
         height: 100vh; /* vh = viewport height (screen height) */
         overflow: hidden; /* Prevent scrolling */
-        font-family: 'Bree Serif', serif;
+        font-family: 'Andale Mono', monospace;
     }
 
     /* Background */
@@ -17,9 +17,9 @@
         position: absolute; /* Positioned relative to screen */
         width: 80vw;
         height: 80vh;
-        top: 0;
+        top: 50;
 
-        background: url("images/night_sky.jpg") no-repeat center/cover;
+        background: url("images/window.jpeg") no-repeat center/cover;
         animation: moveBg 40s infinite;
         z-index: 0;                /* Behind everything */
     }
@@ -42,26 +42,40 @@
 
     /* title */
     .letter_sec {
-    position: relative;
-    height: 12vw;
+    display: flex; /* Arrang in a row */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 0.5vw; /* Space between letters */
+    height: 20vh;
+    z-index: 3;
     }
 
     .letter_sec div { /* title text */
         color: white;
         font-size: 8vw; /* vw scales with screen */
-        float: left;
-        margin-top: 3vw;
+        animation: fadeUp 1.5s ease forwards;
     }
 
     .first_letter { /* Big first letter I */
-        font-size: 11vw;
-        position: absolute;
-        left: 30vw;
-        margin-top: -12vw;
+        font-size: 14vw;
+        animation-delay: 0.2s;
     }
 
     .last_letter { /* Big last letter T */
-        font-size: 11vw;
+        font-size: 14vw;
+        animation-delay: 0.4s;
+    }
+
+    /* Fade + move animation */
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* characters */
@@ -76,31 +90,33 @@
         height: 70vh;
         margin: auto;
 
-        margin-top: -100vh; /* Start above screen */
-
         background: url("images/together.png") no-repeat center/cover;
-
-        animation: dropCharacters 2s ease forwards; /* Drop animation */
+        transform: translateY(-120%);
+        animation: dropCharacters 1.8s ease forwards; /* Drop animation */
     }
 
     @keyframes dropCharacters {
         to {
-            margin-top: 5vh;
+            transform: translateY(0);
         }
     }
 
     /* memory balls */
     .memory_buttons {
-        display: flex; /* Arrange in a row */
-        justify-content: center;
-        gap: 40px; /* Space between balls */
-        margin-top: 40px;
+        position: absolute; /* remove element from normal doc flow and position at specific location */
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        width:500px;
+        height:250px;
+        pointer-events:none;
     }
 
     /* Base style for all balls */
     .memory {
-        width: 120px;
-        height: 120px;
+        position: absolute;
+        width: 130px;
+        height: 130px;
         border-radius: 50%; /* Makes circle */
         color: white;
 
@@ -108,33 +124,50 @@
         align-items: center;
         justify-content: center;
 
+        font-weight: bold;
+        text-align: center;
         cursor: pointer;
+        pointer-events: auto;
 
-        /* Glow animation */
-        animation: glow 2s infinite alternate;
+        /* Glass effect */
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: bur(8px);
+
+        /* shine */
+        box-shadow:inset -10px -10px 20px rgba(255,255,255,0.3), inset 10px 10px 20px rgba(0,0,0,0.2), 0 0 30px rgba(255,255,255,0.4);
+        animation: float 6s ease-in-out infinite;
     }
 
-    /* Emotion colors */
-    .joy {
-        background: #FAE5A4;
-        color: #333;
+    /* semi circle positions */
+    .memory.joy{
+        left: -20%;
+        top: 100px;
+        background:rgba(228, 196, 101, 0.763);
+        color:  #424242;
     }
 
-    .sad {
-        background: #4DA3FF;
+    .memory.sad{
+        left: 60%;
+        top: -80px;
+        background: rgba(108, 163, 222, 0.61);
+        color:  #424242;
     }
 
-    .anger {
-        background: #D21F27;
+    .memory.anger{
+        left: 90%;
+        top: 100px;
+        background: rgba(234, 79, 86, 0.635);
+        color: #424242;
     }
 
-    /* Glow animation */
-    @keyframes glow {
-        from {
-            transform: scale(1);
-        }
-        to {
-            transform: scale(1.08);
-        }
+    /* Float animation */
+    @keyframes float {
+        0% {transform: translateY(0);}
+        50% {transform: translateY(-15px);}
+        100% {transform: translateY(0);}
     }
-}
+
+    /* Hover effect */
+    .memory:hover {
+        transform: scale(1.1);
+    }
