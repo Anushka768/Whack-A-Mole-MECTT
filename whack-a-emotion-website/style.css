@@ -4,72 +4,137 @@
     font-family: 'Segeo UI', sans-serif;
 
     body {
-        margin: 0; /* remove default spacing */
-        height: 100vh; /* full screen height */
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        margin: 0; /* Remove white borders */
+        width: 100vw; /* vw = viewport width (screen width) */
+        height: 100vh; /* vh = viewport height (screen height) */
+        overflow: hidden; /* Prevent scrolling */
+        font-family: 'Bree Serif', serif;
+    }
+
+    /* Background */
+
+    .real_background {
+        position: absolute; /* Positioned relative to screen */
+        width: 80vw;
+        height: 80vh;
+        top: 0;
+
+        background: url("images/night_sky.jpg") no-repeat center/cover;
+        animation: moveBg 40s infinite;
+        z-index: 0;                /* Behind everything */
+    }
+
+    /* Animation definition */
+    @keyframes moveBg {
+        0% { left: 0; }
+        50% { left: 20%; }
+        100% { left: 0; }
+    }
+
+    /* Home Page (.) represents a class*/
+    .home_page{
+        position: relative;  
+        width: 100vw;
+        height: 100vh;
+        background: url("images/background.png") no-repeat center/cover;
+        z-index: 2;
+    }
+
+    /* title */
+    .letter_sec {
+    position: relative;
+    height: 12vw;
+    }
+
+    .letter_sec div { /* title text */
+        color: white;
+        font-size: 8vw; /* vw scales with screen */
+        float: left;
+        margin-top: 3vw;
+    }
+
+    .first_letter { /* Big first letter I */
+        font-size: 11vw;
+        position: absolute;
+        left: 30vw;
+        margin-top: -12vw;
+    }
+
+    .last_letter { /* Big last letter T */
+        font-size: 11vw;
+    }
+
+    /* characters */
+    
+    .character_out {
+        position: relative;
+        height: 78vh;
+    }
+
+    .five_character { /* Five emotions image */
+        width: 40vw;
+        height: 70vh;
+        margin: auto;
+
+        margin-top: -100vh; /* Start above screen */
+
+        background: url("images/together.png") no-repeat center/cover;
+
+        animation: dropCharacters 2s ease forwards; /* Drop animation */
+    }
+
+    @keyframes dropCharacters {
+        to {
+            margin-top: 5vh;
+        }
+    }
+
+    /* memory balls */
+    .memory_buttons {
+        display: flex; /* Arrange in a row */
+        justify-content: center;
+        gap: 40px; /* Space between balls */
+        margin-top: 40px;
+    }
+
+    /* Base style for all balls */
+    .memory {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; /* Makes circle */
         color: white;
 
-        /* center everything */
-        display: flex;
+        display: flex; /* Center text */
+        align-items: center;
         justify-content: center;
-        align-items: center;
-
-    }
-
-    /* .screen is a CLASS. Anything with class="screen" gets this styling */
-    .screen{
-        display: none; /* hidden by default */
-        flex-direction: column; /* column means top to bottom arrangement */
-        align-items: center;
-        text-align: center;
-    }
-
-   /* .screen.active means: An element that has BOTH classes "screen" AND "active" */
-    .screen.active{
-        display: flex; /* only active screen is visible */
-    }
-
-    .title {
-        font-size: 3rem;
-        margin-bottom: 0.2em;
-    }
-
-    .subtitle {
-        opacity: 0.8;
-        margin-bottom: 2em;
-    }
-
-    .btn {
-        width: 220px; 
-        padding: 14px;
-        margin: 10px;
-
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 8px;
 
         cursor: pointer;
 
-        background: #ff4b2b;
-        color: white;
-
-        /* smooth animation */
-        transition: transform 0.2s, background 0.2s;
+        /* Glow animation */
+        animation: glow 2s infinite alternate;
     }
 
-    /* When mouse is over button */
-    .btn:hover {
-        transform: scale(1.05);
-        background: #ff416c;
+    /* Emotion colors */
+    .joy {
+        background: #FAE5A4;
+        color: #333;
     }
 
-    /* Secondary button style */
-    .btn.secondary {
-        background: transparent;
-        border: 2px solid white;
+    .sad {
+        background: #4DA3FF;
     }
 
-    .btn.secondary:hover {
-        background: rgba(255,255,255,0.15);
+    .anger {
+        background: #D21F27;
+    }
+
+    /* Glow animation */
+    @keyframes glow {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.08);
+        }
     }
 }

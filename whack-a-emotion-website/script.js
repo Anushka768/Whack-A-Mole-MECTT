@@ -16,32 +16,17 @@ firebaseConfig.initializeApp(firebaseConfig);
 //Reference database
 const db = firebase.database();
 
-//hides all screens
-function hideAllScreens() {
-  document.querySelectorAll('.screen') //document: webpage, querySelectorAll : find all elements that match the class selector in brackets
-    .forEach(screen=> {
-      screen.classList.remove('active'); // remove active class from each list
-    });
+function startGame() {
+  alert("Start Game clicked");
+  // Later this will open name + level screen
 }
 
-function goHome(){
-  hideAllScreens();
-  document.getElementById('home-screen') // getElementById finds one element by ID
-    .classList.add('active');
+// Runs when Rules ball is clicked
+function showRules() {
+  alert("Rules clicked");
 }
 
-function goToSetup(){
-  alert("Player Setup");
-}
-
-function showRules(){
-  hideAllScreens();
-  document.getElementById('rules-screen')
-    .classList.add('active');
-}
-
+// Runs when Leaderboard ball is clicked
 function showLeaderboard() {
-  hideAllScreens();
-  document.getElementById('leaderboard-screen')
-    .classList.add('active');
+  alert("Leaderboard clicked");
 }
