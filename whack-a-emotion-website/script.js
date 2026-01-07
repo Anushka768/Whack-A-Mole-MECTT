@@ -14,10 +14,7 @@ const firebaseConfig = {
 firebaseConfig.initializeApp(firebaseConfig);
 
 //Reference database
-const db = firebaseConfig.database();
-
-const statusDiv = document.getElementById("status");
-const scoreDiv = document.getElementById("score");
+const db = firebase.database();
 
 //hides all screens
 function hideAllScreens() {

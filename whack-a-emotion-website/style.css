@@ -19,7 +19,7 @@
     /* .screen is a CLASS. Anything with class="screen" gets this styling */
     .screen{
         display: none; /* hidden by default */
-        flex-direction: column;
+        flex-direction: column; /* column means top to bottom arrangement */
         align-items: center;
         text-align: center;
     }
@@ -40,7 +40,7 @@
     }
 
     .btn {
-        width: 220px;
+        width: 220px; 
         padding: 14px;
         margin: 10px;
 
