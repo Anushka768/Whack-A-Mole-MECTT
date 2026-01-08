@@ -5,30 +5,46 @@
 
     body {
         margin: 0; /* Remove white borders */
-        width: 100vw; /* vw = viewport width (screen width) */
-        height: 100vh; /* vh = viewport height (screen height) */
-        overflow: hidden; /* Prevent scrolling */
+        width: 100vw; /* 100% of screen width, vw = viewport width (screen width) */
+        height: 100vh; /* 100% of screen height vh = viewport height (screen height) */
+        overflow: hidden; /* hide anything outside the screen */
+        background: rgb(182, 202, 210);
         font-family: 'Andale Mono', monospace;
     }
 
     /* Background */
 
     .real_background {
-        position: absolute; /* Positioned relative to screen */
-        width: 80vw;
-        height: 80vh;
-        top: 50;
+        position: absolute; /* absolute: means remove from normal flow of arrangement */
+        width: 30vw; /* 30% of screen width to match window size*/      
+        height: 110vh; /* taller than screen to match window size*/          
+        top: 83%;
+        transform: translate(-50%, -50%);
+        background-image: url("images/window.jpeg");
+        background-repeat: repeat-x; /*repeats image side by side- horizontally */
+        background-position: 0 0; 
+        background-size: contain; /* entire image no cropping  */
 
-        background: url("images/window.jpeg") no-repeat center/cover;
-        animation: moveBg 40s infinite;
-        z-index: 0;                /* Behind everything */
+        animation: scrollWindow 120s linear infinite; 
+        z-index: 0; /* behind everything else */          
+    }
+
+    .real_background.right {
+        left: 62%;          
+    }
+
+    .real_background.left {
+        left: 34%;          
     }
 
     /* Animation definition */
-    @keyframes moveBg {
-        0% { left: 0; }
-        50% { left: 20%; }
-        100% { left: 0; }
+    @keyframes scrollWindow {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: -2000px 0;
+        }
     }
 
     /* Home Page (.) represents a class*/
@@ -140,16 +156,17 @@
 
     /* semi circle positions */
     .memory.joy{
-        left: -20%;
-        top: 100px;
+        left: 60%;
+        top: -80px;
         background:rgba(228, 196, 101, 0.763);
         color:  #424242;
     }
 
     .memory.sad{
-        left: 60%;
-        top: -80px;
-        background: rgba(108, 163, 222, 0.61);
+        left: -20%;
+        top: 100px;
+        
+        background: rgba(123, 179, 240, 0.701);
         color:  #424242;
     }
 
