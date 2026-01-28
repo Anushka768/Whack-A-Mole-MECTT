@@ -8,6 +8,19 @@
 #include <MD_MAX72xx.h>
 #include <SPI.h>
 
+// wi-fi setup for website sync---------------------------------------
+# include <WiFi.h> // creates esp wi-fi
+#include <WebServer.h> // allow esp32 to host a website
+
+//wifi credentials
+const char* ssid = "INSLED-OUT";
+const char* password = "12345678";
+
+//webServer port 80
+WebServer server(80);
+
+String webState = "WAITING";
+
 enum GameState {
   IDLE, // shows MECTT
   COUNTDOWN, 
@@ -42,6 +55,20 @@ const unsigned long GAME_DURATION = 45000; // unsigned long used because time ca
 const unsigned long START_INTERVAL = 1000;
 const unsigned long MIN_INTERVAL = 300;
 const unsigned long GAME_OVER_TIME = 10000; // 15 sec after game end the game goes back to idle state
+
+//sends current game state
+void handleState() {
+  server.send(200, "text/plain", webState);
+}
+
+void handleRoot() {
+  server.send(200, "text/plain", "ESP32 RUNNING");
+}
+
+int score = 0;
+void handleScore() {
+  server.send(200, "text/plain", String(score));
+}
 
 // Shift Register setup (SN74HC595N) with helper functions------------------------------------------------
 #define SR_DATA 27 //SER
@@ -100,7 +127,6 @@ Mole moles[NUM_MOLES] = {
   {0, 18, false, false}  //QA
 };
 
-int score = 0;
 //int activeMole = -1; // -1 means no mole is on
 
 // store time stamps instead of delays as delay freezes the game
@@ -222,7 +248,7 @@ void evaluateMoles() {
     }
   }
   score = max(0, score - misses);
-
+  if (hits > 0) buzzerHappy();
   else if (misses > 0) buzzerSad();
   
   showScore();
@@ -237,6 +263,7 @@ void resetGame() {
   countdownTimer = millis();
   clearMoles();
   gameState = COUNTDOWN;
+  webState = "WAITING";
 }
 
 void endGame() {
@@ -248,14 +275,15 @@ void endGame() {
 
   if (score >= winScore) {
     showText("WIN");
+    webState = "WIN";
   }
   else if (score >= winScore - 3) {
     showText("SO CLOSE");
-    delay(400);
-    showText("LOST");
+    webState = "CLOSE";
   }
   else {
     showText("LOST");
+    webState = "LOSE";
   }
 }
 
@@ -290,7 +318,17 @@ void setup() {
   matrix.displayClear();
 
   showText("MECTT");
+  webState = "WAITING";
   randomSeed(millis());
+
+  // Website Setup=========================================
+  WiFi.softAP(ssid, password); // start esp32 as wi-fi hotspot
+  Serial.println("ESP32 AP STARTED");
+  Serial.println(WiFi.softAPIP());
+  server.on("/", handleRoot);
+  server.on("/state", handleState);
+  server.on("/score", handleScore);
+  server.begin();
 }
 
 void loop() {
@@ -325,6 +363,7 @@ void loop() {
         delay(300);
         matrix.displayClear();
         gameState = PLAYING;
+        webState = "PLAYING";
         gameStartTime = millis();
         spawnMole();
       }
@@ -368,6 +407,10 @@ void loop() {
         
         gameState = IDLE;
         showText("MECTT");
+        webState = "WAITING";
       }
-  }
+  } 
+
+  // website loop ===========================================
+  server.handleClient();
 }
