@@ -1,0 +1,75 @@
+body {
+  background: linear-gradient(180deg, #000, #111);
+  color: white;
+  font-family: 'Andale Mono', monospace;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  background: linear-gradient(90deg,
+    #ff4d4d,
+    #ffcc00,
+    #4dff4d,
+    #4dd2ff,
+    #b84dff
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+select, label {
+  padding: 8px;
+  border-radius: 10px;
+  background: #111;
+  color: white;
+  border: 1px solid #555;
+}
+
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+th {
+  background: linear-gradient(45deg, #00f0ff, #7a00ff);
+  padding: 12px;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+tr.win {
+  background: rgba(0,255,0,0.15);
+}
+
+tr.lose {
+  background: rgba(255,0,0,0.15);
+}
+
+tr.close {
+  background: rgba(255,165,0,0.25);
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff4d4d, #4dd2ff);
+  cursor: pointer;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Sign In</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+
+<body>
+    <div class="signin-container">
+        <div class="background"></div>
+        <div class="card"> <!--all user interactive elements are stored under this container-->
+            <h1>Enter Your Mind</h1>
+            <label>Player Name</label> <!--label: is for form control like input, checkbox, dropdown-->
+            <input type="text" id="playerName" placeHolder="Enter your first name">
+
+            <label>University</label>
+            <input type="text" id="playerUni" placeHolder="Enter your University">
+
+            <label>Select Difficulty</label> 
+            <select id="difficulty"> <!--for drop down menu to select from-->
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
+            </select>
+
+            <button onclick="startGame()">Start Game</button>
+
+            <p id="error"></p> <!--p: means paragraph, this is error message if something is not filled-->
+        </div>
+    </div>
+    <script src="states.js"></script>
+    <script src="signin.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <link rel="stylesheet" href="leaderboard.css">
+</head>
+
+<body>
+
+  <h1>🌈 Inside Out Leaderboard</h1>
+
+  <div class="filters">
+    <select id="filter-uni"></select>
+
+    <select id="filter-sort">
+      <option value="score">🏆 Highest Score</option>
+      <option value="time">🕒 Newest</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="filter-today"> Today Only
+    </label>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>University</th>
+        <th>Score</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <button onclick="goHome()">⬅ Back to Home</button>
+  <script src = "states.js"></script>
+  <script src="leaderboard.js"></script>
+</body>
+</html>

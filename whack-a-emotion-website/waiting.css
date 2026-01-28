@@ -1,0 +1,70 @@
+body {
+  margin: 0;/* Remove default browser spacing */
+  height: 100vh;/* Full screen height */
+  background: black;
+  font-family: 'Andale Mono', monospace;
+  overflow: hidden;/* No scrolling */
+}
+
+.waiting-container {
+  position: relative;        
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.background {
+  position: absolute;/* Remove from normal layout */
+  width: 70vw;
+  height: 100vh;
+  right:0;
+  background: url("Waiting_disgust.gif") center / cover no-repeat;
+
+}
+
+.content {
+  position: relative;
+  margin-left: 5vw;
+  max-width: 360px;
+  top: 8%;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+/* Status text */
+.status {
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+
+.dots span {
+  font-size: 2rem;
+  animation: blink 1.5s infinite;
+}
+
+/* Delay each dot */
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .content {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+}
