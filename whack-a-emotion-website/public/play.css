@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: var(--vh);
+  background: black;
+  overflow: hidden;
+}
+
+#movie {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* one scene visible at a time*/
+.scene {
+  position: absolute;
+  inset: 0;               
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+  background:black;    
+  opacity: 0;/* hidden by default */
+  transition: opacity 1.2s ease-in-out;
+}
+
+.scene.active {
+  opacity: 1;
+}

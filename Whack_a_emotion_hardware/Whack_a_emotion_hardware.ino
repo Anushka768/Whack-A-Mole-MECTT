@@ -11,7 +11,7 @@
 // wi-fi setup for website sync---------------------------------------
 # include <WiFi.h> // creates esp wi-fi
 #include <WebServer.h> // allow esp32 to host a website
-
+#include <SPIFFS.h>
 //wifi credentials
 const char* ssid = "INSLED-OUT";
 const char* password = "12345678";
@@ -54,15 +54,11 @@ bool lastDiffBtn = HIGH;
 const unsigned long GAME_DURATION = 45000; // unsigned long used because time can never be negative
 const unsigned long START_INTERVAL = 1000;
 const unsigned long MIN_INTERVAL = 300;
-const unsigned long GAME_OVER_TIME = 10000; // 15 sec after game end the game goes back to idle state
+const unsigned long GAME_OVER_TIME = 5000; // 15 sec after game end the game goes back to idle state
 
 //sends current game state
 void handleState() {
   server.send(200, "text/plain", webState);
-}
-
-void handleRoot() {
-  server.send(200, "text/plain", "ESP32 RUNNING");
 }
 
 int score = 0;
@@ -291,7 +287,20 @@ void endGame() {
 
 void setup() {
   Serial.begin(115200);
-
+  
+  // Website Setup=========================================
+  WiFi.softAP(ssid, password); // start esp32 as wi-fi hotspot
+  Serial.println("ESP32 AP STARTED");
+  Serial.println(WiFi.softAPIP());
+  if (!SPIFFS.begin(true)) {
+    serial.println("SPIFFS mount Failed");
+    return;
+  }
+  server.serveStatic("/",SPIFFS, "/".setDefaultFile("homepage.html");
+  server.on("/state", handleState);
+  server.on("/score", handleScore);
+  server.begin();
+  
   // all led light up when plugges in
   srState = 0xFF;
   shiftRegisterWrite();
@@ -320,15 +329,6 @@ void setup() {
   showText("MECTT");
   webState = "WAITING";
   randomSeed(millis());
-
-  // Website Setup=========================================
-  WiFi.softAP(ssid, password); // start esp32 as wi-fi hotspot
-  Serial.println("ESP32 AP STARTED");
-  Serial.println(WiFi.softAPIP());
-  server.on("/", handleRoot);
-  server.on("/state", handleState);
-  server.on("/score", handleScore);
-  server.begin();
 }
 
 void loop() {
@@ -364,16 +364,6 @@ void loop() {
         matrix.displayClear();
         gameState = PLAYING;
         webState = "PLAYING";
-        gameStartTime = millis();
-        spawnMole();
-      }
-    }
-  }
-
-  if (gameState == PLAYING) {
-    showTimeBar ();
-    if(millis() - gameStartTime >= GAME_DURATION) {
-      endGame();
       return;
     }
 
